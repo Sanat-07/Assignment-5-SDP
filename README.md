@@ -1,12 +1,11 @@
 # Assignment 5 - Software Design Patterns (SDP)
 
 ## Project Description
-This is a Java-based home automation system implementing **6 design patterns**:
+This is a Java-based home automation system implementing **5 design patterns**:
+- **Decorator Pattern** - Device decorators (VoiceControl, RemoteAccess, EnergySaving)
+- **Facade Pattern** - HomeAutomationFacade for simplified operations
 - **Factory Pattern** - DeviceFactory for creating device instances
 - **Builder Pattern** - SmartHomeBuilder for flexible home configuration
-- **Observer Pattern** - Device monitoring and automatic responses
-- **Facade Pattern** - HomeAutomationFacade for simplified operations
-- **Decorator Pattern** - Device decorators (VoiceControl, RemoteAccess, EnergySaving)
 - **Singleton Pattern** - UserDatabase for centralized user management
 
 ## Project Structure
@@ -26,12 +25,6 @@ src/
 ├── builder/                      # Builder pattern
 │   ├── SmartHome.java           # Smart home configuration object
 │   └── SmartHomeBuilder.java    # Builder for smart home setup
-├── observer/                     # Observer pattern (NEW!)
-│   ├── DeviceObserver.java      # Observer interface
-│   ├── DeviceSubject.java       # Subject for managing observers
-│   ├── CameraObserver.java      # Monitors door events
-│   ├── TemperatureObserver.java # Monitors temperature changes
-│   └── LightObserver.java       # Monitors music system events
 ├── decorators/                   # Decorator pattern implementations
 │   ├── DeviceDecorator.java     # Abstract decorator base class
 │   ├── VoiceControlDecorator.java    # Voice control decorator
@@ -63,14 +56,6 @@ Implements the **Builder Pattern** for smart home configuration:
 - **SmartHomeBuilder**: Fluent interface builder for flexible home setup
 - Allows step-by-step construction of complex smart home configurations
 - Supports method chaining for readable code
-
-### `observer` Package (NEW! 🎉)
-Implements the **Observer Pattern** for automatic device responses:
-- **DeviceObserver**: Interface for observers
-- **DeviceSubject**: Manages and notifies observers
-- **CameraObserver**: Camera activates when door opens
-- **TemperatureObserver**: Sends alerts when temperature > 30°C
-- **LightObserver**: Light dims when music starts
 
 ### `decorators` Package  
 Contains the decorator pattern implementation. Decorators add additional functionality to devices:
@@ -141,52 +126,29 @@ SmartHome home = new SmartHomeBuilder()
     .build();
 ```
 
-### 3. Observer Pattern 👁️
-**Purpose**: Enables automatic responses when device states change  
-**Implementation**: Devices notify observers when events occur (door opens, temperature changes, music starts).  
-**Benefits**:
-- Automatic device coordination
-- Loose coupling between devices
-- Easy to add new behaviors
-
-**Example Usage**:
-```java
-// Observer monitors door
-CameraObserver cameraObserver = new CameraObserver(camera);
-door.getSubject().attach(cameraObserver);
-
-// When door opens, camera automatically activates
-door.turnOn();  // Camera turns on automatically!
-```
-
-**Active Monitoring:**
-- 🚪 Door opens → Camera activates
-- 🌡️ Temperature > 30°C → Alert notification
-- 🎵 Music starts → Light dims to 30%
-
-### 4. Facade Pattern 🎭
+### 3. Facade Pattern 🎭
 **Purpose**: Simplifies complex subsystem interactions  
 **Implementation**: `HomeAutomationFacade` provides simple methods like `startPartyMode()` that coordinate multiple devices.
 
-### 5. Decorator Pattern 🎨
+### 4. Decorator Pattern 🎨
 **Purpose**: Adds functionality to devices dynamically without modifying their structure  
 **Implementation**: Multiple decorators can be stacked to add voice control, remote access, and energy-saving features to any device.
 
-### 6. Singleton Pattern 🔒
+### 5. Singleton Pattern 🔒
 **Purpose**: Ensures single instance of UserDatabase  
 **Implementation**: `UserDatabase` manages all users in a centralized location.
 
 ## Features
 - ✅ User authentication system
 - ✅ Multiple device support (Light, Thermostat, Door, Camera, TV, Music)
+- ✅ **Decorator Pattern** - Dynamic feature extension
+- ✅ **Facade Pattern** - Simplified high-level control
 - ✅ **Factory Pattern** - Dynamic device creation
 - ✅ **Builder Pattern** - Flexible smart home configuration
-- ✅ **Observer Pattern** - Automatic device monitoring and responses
 - ✅ Voice control interface
 - ✅ Remote control via app
 - ✅ Energy-saving modes
 - ✅ Pre-configured scenarios (Party Mode, Night Mode, Leave Home)
-- ✅ Intelligent automation (door→camera, temp→alert, music→light)
 
 ## Default Users
 - **Login**: `sanat` | **Password**: `2007` | **Name**: Sanat

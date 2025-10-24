@@ -1,11 +1,8 @@
 package devices;
 
-import observer.DeviceSubject;
-
 public class Light implements Device {
     private boolean isOn = false;
     private int brightness = 100;
-    private DeviceSubject subject = new DeviceSubject();
     
     @Override
     public void turnOn() {
@@ -38,10 +35,6 @@ public class Light implements Device {
         } else {
             System.out.println("Set brightness " + x + "%");
         }
-    }
-    
-    public DeviceSubject getSubject() {
-        return subject;
     }
 }
 

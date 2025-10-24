@@ -5,7 +5,6 @@ import user.User;
 import user.UserDatabase;
 import factory.DeviceFactory;
 import factory.DeviceType;
-import observer.*;
 
 import java.util.Scanner;
 
@@ -33,15 +32,6 @@ public class Main {
         Thermostat thermostat = (Thermostat) DeviceFactory.createDevice(DeviceType.THERMOSTAT);
         SecurityCamera camera = (SecurityCamera) DeviceFactory.createDevice(DeviceType.SECURITY_CAMERA);
         SmartTv tv = (SmartTv) DeviceFactory.createDevice(DeviceType.SMART_TV);
-        
-        CameraObserver cameraObserver = new CameraObserver(camera);
-        door.getSubject().attach(cameraObserver);
-        
-        TemperatureObserver tempObserver = new TemperatureObserver();
-        thermostat.getSubject().attach(tempObserver);
-        
-        LightObserver lightObserver = new LightObserver(light);
-        musicSystem.getSubject().attach(lightObserver);
         
         door.turnOn();
 
