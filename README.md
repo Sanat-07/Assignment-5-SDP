@@ -154,7 +154,6 @@ SmartHome home = new SmartHomeBuilder()
 - ✅ Energy-saving modes
 - ✅ Pre-configured scenarios (Party Mode, Night Mode, Leave Home)
 - ✅ **Pattern Tutorial** - Step-by-step guide in Kazakh
-- ✅ **Example Usage** - Code examples for all patterns
 
 ## Default Users
 - **Login**: `sanat` | **Password**: `2007` | **Name**: Sanat
@@ -170,20 +169,6 @@ SmartHome home = new SmartHomeBuilder()
 - Facade Pattern қалай қолдану
 - Builder Pattern қалай қолдану
 - Толық мысалдар
-
-### ExampleUsage.java
-5 практикалық мысал:
-1. Factory Pattern - құрылғы жасау
-2. Decorator - бір декоратор
-3. Decorator - екі декоратор
-4. Decorator - үш декоратор
-5. Нақты сценарий - таңғы режим
-
-**Іске қосу:**
-```bash
-javac -d out src/**/*.java src/*.java
-java -cp out ExampleUsage
-```
 
 ## Author
 Sanat-07
