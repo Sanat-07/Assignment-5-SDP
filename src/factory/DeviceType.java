@@ -6,6 +6,10 @@ public enum DeviceType {
     DOOR,
     SECURITY_CAMERA,
     SMART_TV,
-    MUSIC_SYSTEM
+    MUSIC_SYSTEM,
+    AIR_CONDITIONER,
+    SMART_LOCK,
+    SMART_BLINDS,
+    ROBOT_VACUUM
 }
 

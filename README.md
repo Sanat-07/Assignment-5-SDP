@@ -11,14 +11,18 @@ This is a Java-based home automation system implementing **5 design patterns**:
 ## Project Structure
 ```
 src/
-├── devices/                      # Device implementations
+├── devices/                      # Device implementations (11 devices)
 │   ├── Device.java              # Base device interface
 │   ├── Light.java               # Light device implementation
 │   ├── Thermostat.java          # Thermostat device implementation
 │   ├── Door.java                # Door device implementation
 │   ├── SecurityCamera.java      # Security camera implementation
 │   ├── SmartTv.java             # Smart TV implementation
-│   └── MusicSystem.java         # Music system implementation
+│   ├── MusicSystem.java         # Music system implementation
+│   ├── AirConditioner.java      # Air conditioner (NEW!)
+│   ├── SmartLock.java           # Smart lock (NEW!)
+│   ├── SmartBlinds.java         # Smart blinds (NEW!)
+│   └── RobotVacuum.java         # Robot vacuum cleaner (NEW!)
 ├── factory/                      # Factory pattern (NEW!)
 │   ├── DeviceType.java          # Enum for device types
 │   └── DeviceFactory.java       # Factory for creating devices
@@ -140,20 +144,46 @@ SmartHome home = new SmartHomeBuilder()
 
 ## Features
 - ✅ User authentication system
-- ✅ Multiple device support (Light, Thermostat, Door, Camera, TV, Music)
+- ✅ **11 Smart Devices** (Light, Thermostat, Door, Camera, TV, Music, AC, Lock, Blinds, Vacuum)
 - ✅ **Decorator Pattern** - Dynamic feature extension
 - ✅ **Facade Pattern** - Simplified high-level control
-- ✅ **Factory Pattern** - Dynamic device creation
+- ✅ **Factory Pattern** - Dynamic device creation (11 types)
 - ✅ **Builder Pattern** - Flexible smart home configuration
 - ✅ Voice control interface
 - ✅ Remote control via app
 - ✅ Energy-saving modes
 - ✅ Pre-configured scenarios (Party Mode, Night Mode, Leave Home)
+- ✅ **Pattern Tutorial** - Step-by-step guide in Kazakh
+- ✅ **Example Usage** - Code examples for all patterns
 
 ## Default Users
 - **Login**: `sanat` | **Password**: `2007` | **Name**: Sanat
 - **Login**: `nurik` | **Password**: `2009` | **Name**: Nurkeldi  
 - **Login**: `mans` | **Password**: `2006` | **Name**: Mansur
+
+## 📚 Learning Resources
+
+### PATTERN_TUTORIAL.md
+Толық нұсқаулық қазақ тілінде:
+- Factory Pattern қалай қолдану
+- Decorator Pattern қалай қолдану (1, 2, 3 декоратор)
+- Facade Pattern қалай қолдану
+- Builder Pattern қалай қолдану
+- Толық мысалдар
+
+### ExampleUsage.java
+5 практикалық мысал:
+1. Factory Pattern - құрылғы жасау
+2. Decorator - бір декоратор
+3. Decorator - екі декоратор
+4. Decorator - үш декоратор
+5. Нақты сценарий - таңғы режим
+
+**Іске қосу:**
+```bash
+javac -d out src/**/*.java src/*.java
+java -cp out ExampleUsage
+```
 
 ## Author
 Sanat-07

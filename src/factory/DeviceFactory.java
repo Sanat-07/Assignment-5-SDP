@@ -18,6 +18,14 @@ public class DeviceFactory {
                 return new SmartTv();
             case MUSIC_SYSTEM:
                 return new MusicSystem();
+            case AIR_CONDITIONER:
+                return new AirConditioner();
+            case SMART_LOCK:
+                return new SmartLock();
+            case SMART_BLINDS:
+                return new SmartBlinds();
+            case ROBOT_VACUUM:
+                return new RobotVacuum();
             default:
                 throw new IllegalArgumentException("Unknown device type: " + type);
         }
