@@ -10,7 +10,7 @@ public class HomeAutomationFacade {
     private Device smartDoor;
     private Device smartCamera;
 
-    public HomeAutomationFacade(Light light, MusicSystem musicSystem, Thermostat thermostat, SecurityCamera camera, Door door) {
+    public HomeAutomationFacade(Device light, Device musicSystem, Device thermostat, Device camera, Device door) {
         smartLight = createSmartDevice(light);
         smartMusic = createSmartDevice(musicSystem);
         smartThermostat = createSmartDevice(thermostat);

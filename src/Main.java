@@ -28,41 +28,22 @@ public class Main {
 
         System.out.println("\nWelcome, " + user.name + "!");
         
-        System.out.println("\n========================================");
-        System.out.println("  Setup Your Smart Home");
-        System.out.println("========================================");
-        System.out.println("[1] Quick Setup");
-        System.out.println("[2] Custom Setup");
-        System.out.print("Choose setup type: ");
-        String setupChoice = sc.nextLine();
+        SmartHome smartHome = new SmartHomeBuilder()
+                .setHomeName(user.name + "'s Smart Home")
+                .setOwner(user.name)
+                .addDevice(DeviceType.SMART_TV)
+                .addDevice(DeviceType.MUSIC_SYSTEM)
+                .enableEnergySaving()
+                .build();
         
-        SmartHome smartHome = null;
-        if (setupChoice.equals("2")) {
-            smartHome = new SmartHomeBuilder()
-                    .setHomeName(user.name + "'s Smart Home")
-                    .setOwner(user.name)
-                    .addDevice(DeviceType.SMART_TV)
-                    .addDevice(DeviceType.MUSIC_SYSTEM)
-                    .enableAllFeatures()
-                    .build();
-            smartHome.displayConfiguration();
-        } else {
-            smartHome = new SmartHomeBuilder()
-                    .setHomeName(user.name + "'s Smart Home")
-                    .setOwner(user.name)
-                    .enableEnergySaving()
-                    .build();
-            System.out.println("Default configuration loaded!");
-        }
-        
-        Door door = (Door) smartHome.getDoor();
+        Device door = smartHome.getDoor();
         door.turnOn();
 
-        Light light = (Light) DeviceFactory.createDevice(DeviceType.LIGHT);
-        MusicSystem musicSystem = (MusicSystem) DeviceFactory.createDevice(DeviceType.MUSIC_SYSTEM);
-        Thermostat thermostat = (Thermostat) DeviceFactory.createDevice(DeviceType.THERMOSTAT);
-        SecurityCamera camera = (SecurityCamera) DeviceFactory.createDevice(DeviceType.SECURITY_CAMERA);
-        SmartTv tv = (SmartTv) DeviceFactory.createDevice(DeviceType.SMART_TV);
+        Device light = DeviceFactory.createDevice(DeviceType.LIGHT);
+        Device musicSystem = DeviceFactory.createDevice(DeviceType.MUSIC_SYSTEM);
+        Device thermostat = DeviceFactory.createDevice(DeviceType.THERMOSTAT);
+        Device camera = DeviceFactory.createDevice(DeviceType.SECURITY_CAMERA);
+        Device tv = DeviceFactory.createDevice(DeviceType.SMART_TV);
 
         Device VoiceSmartLight = new VoiceControlDecorator(new EnergySavingDecorator(light));
         Device VoiceSmartMusic = new VoiceControlDecorator(new EnergySavingDecorator(musicSystem));
@@ -78,47 +59,13 @@ public class Main {
         HomeAutomationFacade home = new HomeAutomationFacade(light, musicSystem, thermostat, camera, door);
 
         while (true) {
-            System.out.println("\n========================================");
-            System.out.println("         Control Panel");
-            System.out.println("========================================");
-            System.out.println("[1] Remote Control");
-            System.out.println("[2] Voice Control");
-            System.out.println("[3] View Smart Home Configuration");
-            System.out.println("[4] Factory Pattern Demo");
-            System.out.println("[0] Exit");
-            System.out.print("Choose mode: ");
+            System.out.println("\nChoose mode: [1] Remote Control  [2] Voice Control  [0] Exit");
             String choice = sc.nextLine();
 
             if (choice.equals("0")) {
-                System.out.println("\n========================================");
-                System.out.println("         Goodbye! See you soon!");
-                System.out.println("========================================");
+                System.out.println("Goodbye.");
                 door.turnOff();
                 break;
-            }
-            
-            if (choice.equals("3")) {
-                smartHome.displayConfiguration();
-                continue;
-            }
-            
-            if (choice.equals("4")) {
-                System.out.println("\n========================================");
-                System.out.println("     Factory Pattern Demo");
-                System.out.println("========================================");
-                DeviceFactory.displayAvailableDevices();
-                System.out.print("\nEnter device type to create: ");
-                String deviceName = sc.nextLine();
-                Device newDevice = DeviceFactory.createDevice(deviceName);
-                if (newDevice != null) {
-                    System.out.println("Device created successfully!");
-                    System.out.print("Test device? (yes/no): ");
-                    if (sc.nextLine().equalsIgnoreCase("yes")) {
-                        newDevice.turnOn();
-                        newDevice.turnOff();
-                    }
-                }
-                continue;
             }
 
             if (choice.equals("1")) {
