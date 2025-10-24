@@ -5,8 +5,6 @@ import user.User;
 import user.UserDatabase;
 import factory.DeviceFactory;
 import factory.DeviceType;
-import builder.SmartHome;
-import builder.SmartHomeBuilder;
 import observer.*;
 
 import java.util.Scanner;
@@ -29,14 +27,6 @@ public class Main {
 
         System.out.println("\nWelcome, " + user.name + "!");
         
-        SmartHome smartHome = new SmartHomeBuilder()
-                .setHomeName(user.name + "'s Smart Home")
-                .setOwner(user.name)
-                .addDevice(DeviceType.SMART_TV)
-                .addDevice(DeviceType.MUSIC_SYSTEM)
-                .enableEnergySaving()
-                .build();
-        
         Door door = (Door) DeviceFactory.createDevice(DeviceType.DOOR);
         Light light = (Light) DeviceFactory.createDevice(DeviceType.LIGHT);
         MusicSystem musicSystem = (MusicSystem) DeviceFactory.createDevice(DeviceType.MUSIC_SYSTEM);
@@ -52,11 +42,6 @@ public class Main {
         
         LightObserver lightObserver = new LightObserver(light);
         musicSystem.getSubject().attach(lightObserver);
-        
-        System.out.println("\n[Observer Pattern] Active monitoring enabled:");
-        System.out.println("  - Door opens -> Camera activates");
-        System.out.println("  - Temperature > 30°C -> Alert notification");
-        System.out.println("  - Music starts -> Light dims");
         
         door.turnOn();
 
