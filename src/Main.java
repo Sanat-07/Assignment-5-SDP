@@ -41,6 +41,10 @@ public class Main {
         Device VoiceSmartMusic = new VoiceControlDecorator(new EnergySavingDecorator(musicSystem));
         Device VoiceSmartThermostat = new VoiceControlDecorator(new EnergySavingDecorator(thermostat));
         Device VoiceSmartDoor = new VoiceControlDecorator(new EnergySavingDecorator(door));
+        Device VoiceSmartAC = new VoiceControlDecorator(new EnergySavingDecorator(ac));
+        Device VoiceSmartLock = new VoiceControlDecorator(new EnergySavingDecorator(lock));
+        Device VoiceSmartBlinds = new VoiceControlDecorator(new EnergySavingDecorator(blinds));
+        Device VoiceSmartVacuum = new VoiceControlDecorator(new EnergySavingDecorator(vacuum));
 
         Device RemoteSmartLight = new RemoteAccessDecorator(new EnergySavingDecorator(light));
         Device RemoteSmartMusic = new RemoteAccessDecorator(new EnergySavingDecorator(musicSystem));
@@ -141,25 +145,70 @@ public class Main {
             }
 
             if (choice.equals("2")) {
-                System.out.println("Voice commands: 'light on', 'light off', 'music on', 'music off', 'volume 70', 'thermostat 25', 'party mode', 'night mode', 'leave home', 'exit'");
+                System.out.println("\n=== Voice Control Commands ===");
+                System.out.println("Basic: 'light on/off', 'music on/off', 'volume 70', 'thermostat 25'");
+                System.out.println("AC: 'ac on/off', 'ac temp 22', 'ac eco'");
+                System.out.println("Lock: 'lock', 'unlock'");
+                System.out.println("Blinds: 'blinds open', 'blinds close', 'blinds 50'");
+                System.out.println("Vacuum: 'vacuum start', 'vacuum stop'");
+                System.out.println("Modes: 'party mode', 'night mode', 'leave home'");
+                System.out.println("Type 'exit' to return\n");
+                
                 while (true) {
                     System.out.print("Say command: ");
                     String cmd = sc.nextLine().toLowerCase();
+                    
                     if (cmd.equals("exit")) break;
+                    
+                    // Light
                     if (cmd.equals("light on")) VoiceSmartLight.turnOn();
                     else if (cmd.equals("light off")) VoiceSmartLight.turnOff();
+                    
+                    // Music
                     else if (cmd.equals("music on")) VoiceSmartMusic.turnOn();
                     else if (cmd.equals("music off")) VoiceSmartMusic.turnOff();
                     else if (cmd.startsWith("volume")) {
                         int v = Integer.parseInt(cmd.split(" ")[1]);
                         VoiceSmartMusic.set(v);
-                    } else if (cmd.startsWith("thermostat")) {
+                    }
+                    
+                    // Thermostat
+                    else if (cmd.startsWith("thermostat")) {
                         int t = Integer.parseInt(cmd.split(" ")[1]);
-                        VoiceSmartLight.set(t);
-                    } else if (cmd.equals("party mode")) home.startPartyMode();
+                        VoiceSmartThermostat.set(t);
+                    }
+                    
+                    // Air Conditioner
+                    else if (cmd.equals("ac on")) VoiceSmartAC.turnOn();
+                    else if (cmd.equals("ac off")) VoiceSmartAC.turnOff();
+                    else if (cmd.startsWith("ac temp")) {
+                        int temp = Integer.parseInt(cmd.split(" ")[2]);
+                        VoiceSmartAC.set(temp);
+                    }
+                    else if (cmd.equals("ac eco")) VoiceSmartAC.ecoMode();
+                    
+                    // Smart Lock
+                    else if (cmd.equals("unlock")) VoiceSmartLock.turnOn();
+                    else if (cmd.equals("lock")) VoiceSmartLock.turnOff();
+                    
+                    // Smart Blinds
+                    else if (cmd.equals("blinds open")) VoiceSmartBlinds.turnOn();
+                    else if (cmd.equals("blinds close")) VoiceSmartBlinds.turnOff();
+                    else if (cmd.startsWith("blinds ")) {
+                        int level = Integer.parseInt(cmd.split(" ")[1]);
+                        VoiceSmartBlinds.set(level);
+                    }
+                    
+                    // Robot Vacuum
+                    else if (cmd.equals("vacuum start")) VoiceSmartVacuum.turnOn();
+                    else if (cmd.equals("vacuum stop")) VoiceSmartVacuum.turnOff();
+                    
+                    // Facade modes
+                    else if (cmd.equals("party mode")) home.startPartyMode();
                     else if (cmd.equals("night mode")) home.activateNightMode();
                     else if (cmd.equals("leave home")) home.leaveHome();
-                    else System.out.println("Unknown command.");
+                    
+                    else System.out.println("Unknown command. Try 'light on', 'ac temp 22', 'unlock', 'blinds open', etc.");
                 }
             }
         }
