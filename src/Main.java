@@ -7,6 +7,7 @@ import factory.DeviceFactory;
 import factory.DeviceType;
 import builder.SmartHome;
 import builder.SmartHomeBuilder;
+import observer.*;
 
 import java.util.Scanner;
 
@@ -36,14 +37,28 @@ public class Main {
                 .enableEnergySaving()
                 .build();
         
-        Device door = smartHome.getDoor();
+        Door door = (Door) DeviceFactory.createDevice(DeviceType.DOOR);
+        Light light = (Light) DeviceFactory.createDevice(DeviceType.LIGHT);
+        MusicSystem musicSystem = (MusicSystem) DeviceFactory.createDevice(DeviceType.MUSIC_SYSTEM);
+        Thermostat thermostat = (Thermostat) DeviceFactory.createDevice(DeviceType.THERMOSTAT);
+        SecurityCamera camera = (SecurityCamera) DeviceFactory.createDevice(DeviceType.SECURITY_CAMERA);
+        SmartTv tv = (SmartTv) DeviceFactory.createDevice(DeviceType.SMART_TV);
+        
+        CameraObserver cameraObserver = new CameraObserver(camera);
+        door.getSubject().attach(cameraObserver);
+        
+        TemperatureObserver tempObserver = new TemperatureObserver();
+        thermostat.getSubject().attach(tempObserver);
+        
+        LightObserver lightObserver = new LightObserver(light);
+        musicSystem.getSubject().attach(lightObserver);
+        
+        System.out.println("\n[Observer Pattern] Active monitoring enabled:");
+        System.out.println("  - Door opens -> Camera activates");
+        System.out.println("  - Temperature > 30°C -> Alert notification");
+        System.out.println("  - Music starts -> Light dims");
+        
         door.turnOn();
-
-        Device light = DeviceFactory.createDevice(DeviceType.LIGHT);
-        Device musicSystem = DeviceFactory.createDevice(DeviceType.MUSIC_SYSTEM);
-        Device thermostat = DeviceFactory.createDevice(DeviceType.THERMOSTAT);
-        Device camera = DeviceFactory.createDevice(DeviceType.SECURITY_CAMERA);
-        Device tv = DeviceFactory.createDevice(DeviceType.SMART_TV);
 
         Device VoiceSmartLight = new VoiceControlDecorator(new EnergySavingDecorator(light));
         Device VoiceSmartMusic = new VoiceControlDecorator(new EnergySavingDecorator(musicSystem));
@@ -55,8 +70,9 @@ public class Main {
         Device RemoteSmartThermostat = new RemoteAccessDecorator(new EnergySavingDecorator(thermostat));
         Device RemoteSmartDoor = new RemoteAccessDecorator(new EnergySavingDecorator(door));
 
-
-        HomeAutomationFacade home = new HomeAutomationFacade(light, musicSystem, thermostat, camera, door);
+        HomeAutomationFacade home = new HomeAutomationFacade(
+            (Device)light, (Device)musicSystem, (Device)thermostat, (Device)camera, (Device)door
+        );
 
         while (true) {
             System.out.println("\nChoose mode: [1] Remote Control  [2] Voice Control  [0] Exit");
