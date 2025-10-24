@@ -1,3 +1,5 @@
+package devices;
+
 public class SecurityCamera implements Device {
     private int time;
     @Override
@@ -17,3 +19,4 @@ public class SecurityCamera implements Device {
         System.out.println("Eco mode is on");
     }
 }
+

@@ -1,3 +1,7 @@
+package decorators;
+
+import devices.Device;
+
 public class RemoteAccessDecorator extends DeviceDecorator {
     public RemoteAccessDecorator(Device decoratedDevice) {
         super(decoratedDevice);
@@ -28,3 +32,4 @@ public class RemoteAccessDecorator extends DeviceDecorator {
         System.out.println("Remote access via app enabled.");
     }
 }
+

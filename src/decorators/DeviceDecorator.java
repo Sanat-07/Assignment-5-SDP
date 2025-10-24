@@ -1,3 +1,7 @@
+package decorators;
+
+import devices.Device;
+
 public abstract class DeviceDecorator implements Device {
     protected Device decoratedDevice;
 
@@ -24,3 +28,4 @@ public abstract class DeviceDecorator implements Device {
     }
 
 }
+

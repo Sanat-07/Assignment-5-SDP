@@ -1,3 +1,5 @@
+package devices;
+
 import java.util.Scanner;
 
 public class SmartTv implements Device{
@@ -24,3 +26,4 @@ public class SmartTv implements Device{
     }
 
 }
+

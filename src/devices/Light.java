@@ -1,3 +1,5 @@
+package devices;
+
 public class Light implements Device {
     private boolean isOn = false;
     @Override
@@ -26,3 +28,4 @@ public class Light implements Device {
 
     }
 }
+

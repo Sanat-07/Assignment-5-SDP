@@ -1,3 +1,7 @@
+package decorators;
+
+import devices.Device;
+
 public class EnergySavingDecorator extends DeviceDecorator {
     public EnergySavingDecorator(Device decoratedDevice) {
         super(decoratedDevice);
@@ -28,3 +32,4 @@ public class EnergySavingDecorator extends DeviceDecorator {
         System.out.println("Energy saving mode activated.");
     }
 }
+

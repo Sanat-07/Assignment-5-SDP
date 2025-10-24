@@ -1,3 +1,5 @@
+package user;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +16,10 @@ public class UserDatabase {
         for (User u : users) {
             if (u.login.equals(login) && u.password.equals(password)) {
                 return u;
-            }x
+            }
         }
         return null;
     }
 }
+
+и

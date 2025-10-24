@@ -1,3 +1,5 @@
+package devices;
+
 public class MusicSystem implements Device {
     private boolean isPlaying = false;
     private int volume = 50;
@@ -30,3 +32,4 @@ public class MusicSystem implements Device {
         System.out.println("Eco mode is on");
     }
 }
+

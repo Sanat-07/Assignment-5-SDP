@@ -1,3 +1,5 @@
+package devices;
+
 public class Door implements Device {
     private boolean locked = true;
     private boolean open = false;
@@ -23,3 +25,4 @@ public class Door implements Device {
         System.out.println("Door ecomode activated.");
     }
 }
+

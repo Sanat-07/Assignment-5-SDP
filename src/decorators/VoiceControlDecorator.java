@@ -1,3 +1,7 @@
+package decorators;
+
+import devices.Device;
+
 public class VoiceControlDecorator extends DeviceDecorator {
     public VoiceControlDecorator(Device decoratedDevice) {
         super(decoratedDevice);
@@ -28,3 +32,4 @@ public class VoiceControlDecorator extends DeviceDecorator {
         System.out.println("Voice control enabled for this device.");
     }
 }
+

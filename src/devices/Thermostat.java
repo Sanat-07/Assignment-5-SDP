@@ -1,3 +1,5 @@
+package devices;
+
 public class Thermostat implements Device {
     private int temperature = 22;
 
@@ -19,3 +21,4 @@ public class Thermostat implements Device {
         System.out.println("Thermostat set to eco mode (" + temperature + "°C).");
     }
 }
+

@@ -1,3 +1,8 @@
+package facade;
+
+import devices.*;
+import decorators.*;
+
 public class HomeAutomationFacade {
     private Device smartLight;
     private Device smartMusic;
@@ -50,3 +55,4 @@ public class HomeAutomationFacade {
         System.out.println("All systems secured.");
     }
 }
+

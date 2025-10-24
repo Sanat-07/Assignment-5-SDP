@@ -1,3 +1,5 @@
+package user;
+
 public class User {
     String name;
     String login;
@@ -9,3 +11,4 @@ public class User {
         this.password = password;
     }
 }
+

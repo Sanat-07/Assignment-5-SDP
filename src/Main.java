@@ -1,3 +1,9 @@
+import devices.*;
+import decorators.*;
+import facade.HomeAutomationFacade;
+import user.User;
+import user.UserDatabase;
+
 import java.util.Scanner;
 
 public class Main {
