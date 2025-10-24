@@ -21,5 +21,3 @@ public class UserDatabase {
         return null;
     }
 }
-
-и

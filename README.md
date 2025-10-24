@@ -1,10 +1,12 @@
 # Assignment 5 - Software Design Patterns (SDP)
 
 ## Project Description
-This is a Java-based home automation system implementing various design patterns including:
-- **Facade Pattern** - HomeAutomationFacade
+This is a Java-based home automation system implementing **5 design patterns**:
+- **Factory Pattern** - DeviceFactory for creating device instances
+- **Builder Pattern** - SmartHomeBuilder for flexible home configuration
+- **Facade Pattern** - HomeAutomationFacade for simplified operations
 - **Decorator Pattern** - Device decorators (VoiceControl, RemoteAccess, EnergySaving)
-- **Singleton Pattern** - UserDatabase
+- **Singleton Pattern** - UserDatabase for centralized user management
 
 ## Project Structure
 ```
@@ -17,6 +19,12 @@ src/
 │   ├── SecurityCamera.java      # Security camera implementation
 │   ├── SmartTv.java             # Smart TV implementation
 │   └── MusicSystem.java         # Music system implementation
+├── factory/                      # Factory pattern (NEW!)
+│   ├── DeviceType.java          # Enum for device types
+│   └── DeviceFactory.java       # Factory for creating devices
+├── builder/                      # Builder pattern (NEW!)
+│   ├── SmartHome.java           # Smart home configuration object
+│   └── SmartHomeBuilder.java    # Builder for smart home setup
 ├── decorators/                   # Decorator pattern implementations
 │   ├── DeviceDecorator.java     # Abstract decorator base class
 │   ├── VoiceControlDecorator.java    # Voice control decorator
@@ -34,6 +42,20 @@ src/
 
 ### `devices` Package
 Contains all device implementations and the base `Device` interface. Each device implements core functionality like `turnOn()`, `turnOff()`, `set()`, and `ecoMode()`.
+
+### `factory` Package (NEW! 🎉)
+Implements the **Factory Pattern** for device creation:
+- **DeviceType**: Enum defining all available device types
+- **DeviceFactory**: Factory class with static methods to create device instances
+- Provides centralized device creation logic
+- Supports both enum-based and string-based device creation
+
+### `builder` Package (NEW! 🎉)
+Implements the **Builder Pattern** for smart home configuration:
+- **SmartHome**: Immutable smart home object with all configurations
+- **SmartHomeBuilder**: Fluent interface builder for flexible home setup
+- Allows step-by-step construction of complex smart home configurations
+- Supports method chaining for readable code
 
 ### `decorators` Package  
 Contains the decorator pattern implementation. Decorators add additional functionality to devices:
@@ -72,25 +94,60 @@ Or using IDE:
 
 ## Design Patterns Used
 
-### 1. Facade Pattern
+### 1. Factory Pattern 🏭
+**Purpose**: Encapsulates object creation logic  
+**Implementation**: `DeviceFactory` provides static factory methods to create device instances based on `DeviceType` enum or string input.  
+**Benefits**: 
+- Centralized device creation
+- Easy to extend with new device types
+- Type-safe device creation
+
+**Example Usage**:
+```java
+Device light = DeviceFactory.createDevice(DeviceType.LIGHT);
+Device tv = DeviceFactory.createDevice("smart_tv");
+```
+
+### 2. Builder Pattern 🏗️
+**Purpose**: Constructs complex objects step by step  
+**Implementation**: `SmartHomeBuilder` uses fluent interface to build `SmartHome` configurations with optional features.  
+**Benefits**:
+- Flexible and readable object construction
+- Supports optional parameters
+- Immutable result object
+
+**Example Usage**:
+```java
+SmartHome home = new SmartHomeBuilder()
+    .setHomeName("My Smart Home")
+    .setOwner("John")
+    .addDevice(DeviceType.SMART_TV)
+    .enableAllFeatures()
+    .build();
+```
+
+### 3. Facade Pattern 🎭
 **Purpose**: Simplifies complex subsystem interactions  
 **Implementation**: `HomeAutomationFacade` provides simple methods like `startPartyMode()` that coordinate multiple devices.
 
-### 2. Decorator Pattern
+### 4. Decorator Pattern 🎨
 **Purpose**: Adds functionality to devices dynamically without modifying their structure  
 **Implementation**: Multiple decorators can be stacked to add voice control, remote access, and energy-saving features to any device.
 
-### 3. Singleton Pattern (Potential)
+### 5. Singleton Pattern 🔒
 **Purpose**: Ensures single instance of UserDatabase  
 **Implementation**: `UserDatabase` manages all users in a centralized location.
 
 ## Features
 - ✅ User authentication system
 - ✅ Multiple device support (Light, Thermostat, Door, Camera, TV, Music)
+- ✅ **Factory Pattern** - Dynamic device creation
+- ✅ **Builder Pattern** - Flexible smart home configuration
 - ✅ Voice control interface
 - ✅ Remote control via app
 - ✅ Energy-saving modes
 - ✅ Pre-configured scenarios (Party Mode, Night Mode, Leave Home)
+- ✅ Interactive demo for all design patterns
 
 ## Default Users
 - **Login**: `sanat` | **Password**: `2007` | **Name**: Sanat
