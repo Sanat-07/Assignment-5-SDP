@@ -3,8 +3,6 @@ import decorators.*;
 import facade.HomeAutomationFacade;
 import user.User;
 import user.UserDatabase;
-import factory.DeviceFactory;
-import factory.DeviceType;
 
 import java.util.Scanner;
 
@@ -26,12 +24,12 @@ public class Main {
 
         System.out.println("\nWelcome, " + user.name + "!");
         
-        Door door = (Door) DeviceFactory.createDevice(DeviceType.DOOR);
-        Light light = (Light) DeviceFactory.createDevice(DeviceType.LIGHT);
-        MusicSystem musicSystem = (MusicSystem) DeviceFactory.createDevice(DeviceType.MUSIC_SYSTEM);
-        Thermostat thermostat = (Thermostat) DeviceFactory.createDevice(DeviceType.THERMOSTAT);
-        SecurityCamera camera = (SecurityCamera) DeviceFactory.createDevice(DeviceType.SECURITY_CAMERA);
-        SmartTv tv = (SmartTv) DeviceFactory.createDevice(DeviceType.SMART_TV);
+        Light light = new Light();
+        MusicSystem musicSystem = new MusicSystem();
+        Thermostat thermostat = new Thermostat();
+        SecurityCamera camera = new SecurityCamera();
+        Door door = new Door();
+        SmartTv tv = new SmartTv();
         
         door.turnOn();
 
